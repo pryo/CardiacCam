@@ -329,13 +329,6 @@ plot(errors);
 axis([0 2000 0.99 1]);
 toc
 
-%% kalman
-model = plantGenerator(w*w,w_e,transfer_matrix);
-Q=1;
-R=1;
-[klamf,L,P,M] = kalman(model,Q,R);
-
-
 
 %%   VIDEO
 

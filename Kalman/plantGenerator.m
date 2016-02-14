@@ -8,21 +8,26 @@ width = sqrt(cellNum);
 %A = eye(cellNum);
 %C = zeros(nodeNum,cellNum);
 indexMatrix = reshape((1:1:cellNum),width,width)';
-%process matrix
-processMatrix = zeros(cellNum,cellNum);
-for i = indexMatrix(2:end-1,2:end-1)
-    processMatrix(i,:) = rowsForMiddle(i,cellNum);
-end
-for i = 1:width
-    if i ==1||i==width
-        for j = indexMatrix(i,:)
-            processMatrix(j,:) = rowsForRim(j,width);
-        end
-    else 
-        processMatrix(indexMatrix(i,1),:) = rowsForRim(indexMatrix(i,1),width);
-        processMatrix(indexMatrix(i,width),:) = rowsForRim(indexMatrix(i,width),width);
-    end
-end
+
+%Identity process matrix
+processMatrix = eye(cellNum);
+
+% %custom process matrix
+% 
+% processMatrix = zeros(cellNum,cellNum);
+% for i = indexMatrix(2:end-1,2:end-1)
+%     processMatrix(i,:) = rowsForMiddle(i,cellNum);
+% end
+% for i = 1:width
+%     if i ==1||i==width
+%         for j = indexMatrix(i,:)
+%             processMatrix(j,:) = rowsForRim(j,width);
+%         end
+%     else 
+%         processMatrix(indexMatrix(i,1),:) = rowsForRim(indexMatrix(i,1),width);
+%         processMatrix(indexMatrix(i,width),:) = rowsForRim(indexMatrix(i,width),width);
+%     end
+% end
 Plant = ss(processMatrix,0,transfer_matrix,0,-1);
 
 
